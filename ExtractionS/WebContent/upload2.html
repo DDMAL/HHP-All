@@ -48,7 +48,7 @@
 
 				<div class="col-md-12">
 
-					<div class="container-inner single-content-wrapper classic-post">
+					<div class="container-inner single-content-wrapper classic-post" >
 						<div class="row">
 							<div class="col-md-9 single-post-selector">
 								<div class="single-page   category- hidden-contents-menu">
@@ -85,21 +85,24 @@
 														</p>
 														
 														<h3>Process file</h3>
-														<div>
-			Select a text file: <input type="file" id="fileInput"
-				class="myButton">
+														<div style="margin-top:25px;">
+			<p>Select a text file:</p> 
+			<button class="blueButton" onclick="getElementById('fileInput').click()">Choose File</button>
+			<input type="file" id="fileInput" style="display:none">
 		</div>
+		<p>
 		<pre id="fileDisplayArea">
 			<pre>
+			</p>
 	
 	</div>
 	<div id="progressbar_profile" style="width: 20%"></div>
 	<div id="info_profile" style="color: #C8C8C8"></div>
-	<p>
-		<button id="action-profile">Analyze</button>
-		<button id="action-edit">Edit in RDF Editor</button>
+	<p align="right">
+		<button id="action-profile" class="blueButton">Analyze</button>
+		<button id="action-edit" class="blueButton">Edit in RDF Editor</button>
 	</p>
-														
+<!-- 														
 
 														<h3>Edit extractions in Event Editor</h3>
 														</p>
@@ -133,7 +136,7 @@
 															takes a minute because several models are loading.
 														</p>
 
-														
+													 -->	
 													</div>
 												</div>
 											</div>
