@@ -65,7 +65,7 @@ function checkStatusOfLongRunningServletTask(url, params, progressbar_name,
 							+ (new Date().getTime() - new Date(json.starttime))
 							+ " ms elapsed.");
 			console.log(json.uuid);
-			if (json.status == 'processing') {
+			if (json.status.indexOf('processing') > -1) {
 				tid = setTimeout(function() {
 					checkStatusOfLongRunningServletTask(url, "?taskid="
 							+ json.uuid, progressbar_name, status_text_name,

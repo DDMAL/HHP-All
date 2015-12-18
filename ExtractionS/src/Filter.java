@@ -12,7 +12,7 @@ import edu.stanford.nlp.dcoref.CorefChain.CorefMention;
 public class Filter {
 	final static Charset ENCODING = StandardCharsets.UTF_8;
 
-	public String filterdata(String text) throws FileNotFoundException,
+	public static String filterdata(String text) throws FileNotFoundException,
 			UnsupportedEncodingException {
 		// Environment setting of StanfordNLP
 		Properties props = new Properties();

@@ -62,17 +62,16 @@ public class ProcessServlet extends LongRunningProcessServlet {
 			
 		}
 
-		
 
 		@Override
 		protected void process() throws Exception {
-			
-			
+
+			this.status = "{\"status\":\"Now processing: CoreNLP\",\"starttime\":" + start_time
+                    + ",\"uuid\":\"" + this.uuid + "\"}";
 
 			System.out.println("Processing Step 1. - CoreNLP");
-			Filter filt = new Filter();
 			System.out.println(text);
-			String processed_text = filt.filterdata(text);
+			String processed_text = Filter.filterdata(text);
 			System.out.println("Processing Step 1. - CoreNLP Done.");
 			
 			
