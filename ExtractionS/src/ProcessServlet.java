@@ -81,6 +81,8 @@ public class ProcessServlet extends LongRunningProcessServlet {
 
 			StringBuilder openIEOutput = new StringBuilder();
 			System.out.println("Processing Step 2. - Openie.");
+			this.status = "{\"status\":\"Now processing: Openie\",\"starttime\":" + start_time
+                    + ",\"uuid\":\"" + this.uuid + "\"}";
 			for (String sentence : processed_text.split("\\. ")) {
 				System.out.println(sentence);
 				Seq<Instance> extractions = openIE.extract(sentence);
@@ -107,7 +109,8 @@ public class ProcessServlet extends LongRunningProcessServlet {
 				}
 			}
 			System.out.println("Processing Step 2. - Openie Done.");
-
+			this.status = "{\"status\":\"Now processing: Rewrite\",\"starttime\":" + start_time
+                    + ",\"uuid\":\"" + this.uuid + "\"}";
 			System.out.println("Processing Step 3. - Rewrite");
 			Load load = new Load();
 			System.out.println(openIEOutput.toString());
