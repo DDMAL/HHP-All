@@ -35,10 +35,12 @@ public class ProcessServlet extends LongRunningProcessServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	
+	
 	@Override
 	protected ThreadProcessor initThreadProcessor(HttpServletRequest request,
 			String uuid) {
-
+		
 		//System.out.println(request.getQueryString());
 		//System.out.println(request.getParameter("op"));
 		return new AnalyzerThreadProcessor(request, uuid);
@@ -65,8 +67,7 @@ public class ProcessServlet extends LongRunningProcessServlet {
 
 		@Override
 		protected void process() throws Exception {
-
-			this.status = "{\"status\":\"Now processing: CoreNLP\",\"starttime\":" + start_time
+			this.status = "{\"status\":\"Now processing CoreNLP.\",\"starttime\":" + start_time
                     + ",\"uuid\":\"" + this.uuid + "\"}";
 
 			System.out.println("Processing Step 1. - CoreNLP");
@@ -74,18 +75,18 @@ public class ProcessServlet extends LongRunningProcessServlet {
 			String processed_text = Filter.filterdata(text);
 			System.out.println("Processing Step 1. - CoreNLP Done.");
 			
-			
+			/*
 			OpenIE openIE = new OpenIE(new ClearParser(new ClearPostagger(
 					new ClearTokenizer(ClearTokenizer.defaultModelUrl()))),
 					new ClearSrl(), false);
-
+*/
 			StringBuilder openIEOutput = new StringBuilder();
 			System.out.println("Processing Step 2. - Openie.");
-			this.status = "{\"status\":\"Now processing: Openie\",\"starttime\":" + start_time
+			this.status = "{\"status\":\"Now processing Openie.\",\"starttime\":" + start_time
                     + ",\"uuid\":\"" + this.uuid + "\"}";
 			for (String sentence : processed_text.split("\\. ")) {
 				System.out.println(sentence);
-				Seq<Instance> extractions = openIE.extract(sentence);
+				Seq<Instance> extractions = GlobalVars.openIE.extract(sentence);
 
 				Instance[] arr = new Instance[extractions.length()];
 				extractions.copyToArray(arr);
@@ -109,7 +110,7 @@ public class ProcessServlet extends LongRunningProcessServlet {
 				}
 			}
 			System.out.println("Processing Step 2. - Openie Done.");
-			this.status = "{\"status\":\"Now processing: Rewrite\",\"starttime\":" + start_time
+			this.status = "{\"status\":\"Now processing Rewrite.\",\"starttime\":" + start_time
                     + ",\"uuid\":\"" + this.uuid + "\"}";
 			System.out.println("Processing Step 3. - Rewrite");
 			Load load = new Load();
