@@ -85,7 +85,7 @@ public class ProcessServlet extends LongRunningProcessServlet {
 			this.status = "{\"status\":\"Now processing Openie.\",\"starttime\":" + start_time
                     + ",\"uuid\":\"" + this.uuid + "\"}";
 			for (String sentence : processed_text.split("\\. ")) {
-				System.out.println(sentence);
+
 				Seq<Instance> extractions = GlobalVars.openIE.extract(sentence);
 
 				Instance[] arr = new Instance[extractions.length()];
@@ -102,10 +102,14 @@ public class ProcessServlet extends LongRunningProcessServlet {
 
 					Part[] arr2 = new Part[inst.extr().arg2s().length()];
 					inst.extr().arg2s().copyToArray(arr2);
+					/*
 					for (Part arg : arr2) {
 						sb.append(arg.text()).append("");
-					}
+						System.out.println("%" + arg.text() + "%");
+					}*/
+					sb.append(arr2[0]);
 					sb.append(")\n\n");
+					System.out.println("*" + sb + "*");
 					openIEOutput.append(sb.toString());
 				}
 			}
