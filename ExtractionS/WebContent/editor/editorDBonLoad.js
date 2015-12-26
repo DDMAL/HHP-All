@@ -351,7 +351,33 @@ var editor_func = function() {
 	 * Note if there are URL arguments when the editor is loading, then process those
 	 * Let's assume that the URL args contain triples
 	 */
-	processURLArgs()
+	processURLArgs();
+	
+	/**
+	 * Read data from a servlet on load
+	 */
+	$.ajax({
+		type : "GET",
+		dataType : "text",
+		beforeSend : function() {		},
+		url : url + "SesameReadServlet?lookup=" + encodeURI("some String HERE"), //note the encodeURI takes care of URL encoding
+		success : function(data, status, xhr) {
+
+			var json = $.parseJSON(data);
+			//console.log(json);
+			
+			$.each(json, function(i, item) {
+				console.log(item);
+				addRow("nq", item.Subject, item.Predicate, item.Object,
+						item.GraphName, item.Index);
+
+			});
+			
+		},
+		error : function(jqXHR, textStatus, errorThrown) {console.log(errorThrown);}
+	});
+	
+	
 	return {
 		// Load the defaul prefix list
 		loadPrefix : function() {
