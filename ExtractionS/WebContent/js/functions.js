@@ -71,27 +71,31 @@ function initialize_components() {
 
 	$('#action-save').click(
 			function() {
-				$.ajax({
-					type : "GET",
-					dataType : "text",
-					beforeSend : function() {
-					},
-					url : url + "SesameWriteServlet?data="
-							+ encodeURI($('#fileDisplayArea').text()), // note the
-																// encodeURI
-																// takes care of
-																// URL encoding
-					success : function(data, status, xhr) {
+				
+				window.location = "eventsEditor.html"
+					
+					$.ajax({
+						type : "GET",
+						dataType : "text",
+						beforeSend : function() {
+						},
+						url : url + "SesameWriteServlet?data="
+								+ encodeURI($('#fileDisplayArea').text()), // note the
+																	// encodeURI
+																	// takes care of
+																	// URL encoding
+						success : function(data, status, xhr) {
 
-						var json = $.parseJSON(data);
-						// console.log(json);
-						$('#info_profile').text(json.status)
+							var json = $.parseJSON(data);
+							// console.log(json);
+							$('#info_profile').text(json.status)
 
-					},
-					error : function(jqXHR, textStatus, errorThrown) {
-						console.log(errorThrown);
-					}
-				});
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
+							console.log(errorThrown);
+						}
+					});
+					
 			});
 
 };
