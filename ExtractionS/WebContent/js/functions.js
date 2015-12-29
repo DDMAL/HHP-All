@@ -72,7 +72,7 @@ function initialize_components() {
 	$('#action-save').click(
 			function() {
 				
-				window.location = "eventsEditor.html"
+				
 					
 					$.ajax({
 						type : "GET",
@@ -95,6 +95,8 @@ function initialize_components() {
 							console.log(errorThrown);
 						}
 					});
+					
+					window.location = "eventsEditor.html"
 					
 			});
 

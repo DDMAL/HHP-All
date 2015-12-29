@@ -35,12 +35,12 @@ public class ProcessServlet extends LongRunningProcessServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	
-	
+
+
 	@Override
 	protected ThreadProcessor initThreadProcessor(HttpServletRequest request,
 			String uuid) {
-		
+
 		//System.out.println(request.getQueryString());
 		//System.out.println(request.getParameter("op"));
 		return new AnalyzerThreadProcessor(request, uuid);
@@ -49,7 +49,7 @@ public class ProcessServlet extends LongRunningProcessServlet {
 	public class AnalyzerThreadProcessor extends ThreadProcessor {
 		private String text = "";
 		private String result;
-		
+
 
 		public AnalyzerThreadProcessor(HttpServletRequest request, String uuid) {
 			super(request, uuid);
@@ -61,29 +61,29 @@ public class ProcessServlet extends LongRunningProcessServlet {
 				e.printStackTrace();
 			}
 			System.out.println(text);
-			
+
 		}
 
 
 		@Override
 		protected void process() throws Exception {
 			this.status = "{\"status\":\"Now processing CoreNLP.\",\"starttime\":" + start_time
-                    + ",\"uuid\":\"" + this.uuid + "\"}";
+					+ ",\"uuid\":\"" + this.uuid + "\"}";
 
 			System.out.println("Processing Step 1. - CoreNLP");
 			System.out.println(text);
 			String processed_text = Filter.filterdata(text);
 			System.out.println("Processing Step 1. - CoreNLP Done.");
-			
+
 			/*
 			OpenIE openIE = new OpenIE(new ClearParser(new ClearPostagger(
 					new ClearTokenizer(ClearTokenizer.defaultModelUrl()))),
 					new ClearSrl(), false);
-*/
+			 */
 			StringBuilder openIEOutput = new StringBuilder();
 			System.out.println("Processing Step 2. - Openie.");
 			this.status = "{\"status\":\"Now processing Openie.\",\"starttime\":" + start_time
-                    + ",\"uuid\":\"" + this.uuid + "\"}";
+					+ ",\"uuid\":\"" + this.uuid + "\"}";
 			for (String sentence : processed_text.split("\\. ")) {
 
 				Seq<Instance> extractions = GlobalVars.openIE.extract(sentence);
@@ -97,8 +97,8 @@ public class ProcessServlet extends LongRunningProcessServlet {
 					Double conf = inst.confidence();
 					String stringConf = conf.toString().substring(0, 4);
 					sb.append(stringConf).append(" (")
-							.append(inst.extr().arg1().text()).append("; ")
-							.append(inst.extr().rel().text()).append("; ");
+					.append(inst.extr().arg1().text()).append("; ")
+					.append(inst.extr().rel().text()).append("; ");
 
 					Part[] arr2 = new Part[inst.extr().arg2s().length()];
 					inst.extr().arg2s().copyToArray(arr2);
@@ -107,15 +107,17 @@ public class ProcessServlet extends LongRunningProcessServlet {
 						sb.append(arg.text()).append("");
 						System.out.println("%" + arg.text() + "%");
 					}*/
-					sb.append(arr2[0]);
-					sb.append(")\n\n");
-					System.out.println("*" + sb + "*");
-					openIEOutput.append(sb.toString());
+					if(arr2.length != 0) {
+						sb.append(arr2[0]);
+						sb.append(")\n\n");
+						System.out.println("*" + sb + "*");
+						openIEOutput.append(sb.toString());
+					}
 				}
 			}
 			System.out.println("Processing Step 2. - Openie Done.");
 			this.status = "{\"status\":\"Now processing Rewrite.\",\"starttime\":" + start_time
-                    + ",\"uuid\":\"" + this.uuid + "\"}";
+					+ ",\"uuid\":\"" + this.uuid + "\"}";
 			System.out.println("Processing Step 3. - Rewrite");
 			Load load = new Load();
 			System.out.println(openIEOutput.toString());
@@ -123,7 +125,7 @@ public class ProcessServlet extends LongRunningProcessServlet {
 			System.out.println("Processing Step 3. - Rewrite Done");
 
 			System.out.println(result);
-			
+
 			//result = "hello you";
 
 			//response.sendRedirect("Index.jsp");
@@ -131,10 +133,10 @@ public class ProcessServlet extends LongRunningProcessServlet {
 
 		protected String setEndProcessingStatus() {
 			Gson g = new Gson();
-			
+
 			return  "{\"datatable\":" + g.toJson(result)
-					+ ",\"status\":\"OK\",\"starttime\":" + start_time
-					+ ",\"uuid\":\"" + this.uuid + "\"}";
+			+ ",\"status\":\"OK\",\"starttime\":" + start_time
+			+ ",\"uuid\":\"" + this.uuid + "\"}";
 		}
 
 
@@ -143,7 +145,7 @@ public class ProcessServlet extends LongRunningProcessServlet {
 		protected void prepareResponse(HttpServletResponse response)
 				throws IOException {
 			// TODO Auto-generated method stub
-			
+
 		}
 	}
 }
