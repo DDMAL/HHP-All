@@ -59,12 +59,20 @@ public class SesameReadServlet extends HttpServlet {
 		rep.initialize();
 		
 		List<Statement> list = new ArrayList<Statement>();
+		List<RDFTriple> finalList = new ArrayList<RDFTriple>();
 		
 		try {
 			   RepositoryConnection con = rep.getConnection();
 			   try {
 					RepositoryResult<Statement> statements =  con.getStatements(null, null, null, true);
 					list = statements.asList();
+					int index = 0;
+					for(Statement s : list) {
+						
+						finalList.add(new RDFTriple(s.getSubject().stringValue().replaceAll("http://example.org/", ""), s.getPredicate().stringValue().replaceAll("http://example.org/", ""),
+								s.getObject().stringValue().replaceAll("http://example.org/", ""), s.getContext() + "", "" +(index++)));
+						
+					}
 			      try {
 			    	 
 			      }
@@ -88,7 +96,7 @@ public class SesameReadServlet extends HttpServlet {
 		
 		// This is a convenience thing - Gson converts  objects into valid json
 		Gson gson = new Gson();
-		out.println(gson.toJson(list));
+		out.println(gson.toJson(finalList));
 		out.close();
 		
 	}

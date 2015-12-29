@@ -92,12 +92,14 @@ public class SesameWriteServlet extends HttpServlet {
 		ValueFactory factory = ValueFactoryImpl.getInstance();
 		
 		for(int i = 0; i < splitString.length; i+=3) {
-			IRI john = factory.createIRI(namespace, "john");
-			conn.add(john, RDF.TYPE, RDF.SUBJECT);
+			//IRI john = factory.createIRI(namespace, "john");
+			//conn.add(john, RDF.TYPE, RDF.SUBJECT);
 
-			//IRI a = factory.createIRI(namespace + );
-			//IRI b = factory.createIRI(splitString[1]);
-			//Statement statement = factory.createStatement(a, b, factory.createLiteral(splitString[2]));
+			IRI a = factory.createIRI(namespace + splitString[i+0]);
+			IRI b = factory.createIRI(namespace + splitString[i+1]);
+			Statement statement = factory.createStatement(a, b, factory.createLiteral(splitString[i+2]));
+			conn.add(statement);
+			System.out.println(statement);
 			//System.out.println(statement.toString());
 			try {
 				//conn.add(statement);
