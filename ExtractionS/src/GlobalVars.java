@@ -1,3 +1,10 @@
+import java.io.File;
+
+import org.openrdf.repository.Repository;
+import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.sail.SailRepository;
+import org.openrdf.sail.nativerdf.NativeStore;
+
 import edu.knowitall.openie.OpenIE;
 import edu.knowitall.tool.parse.ClearParser;
 import edu.knowitall.tool.postag.ClearPostagger;
@@ -10,4 +17,7 @@ public class GlobalVars {
 			new ClearTokenizer(ClearTokenizer.defaultModelUrl()))),
 			new ClearSrl(), false);
 	public static String rootDir = "/Users/nkasch/Documents/HHP";
+	public static File dataDir = new File("~/Projects/HHP/HHP/ExtractionS/");
+	public static Repository rep = new SailRepository(new NativeStore(dataDir));
+	public static RepositoryConnection conn = null;
 }

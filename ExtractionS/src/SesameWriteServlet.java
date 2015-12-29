@@ -67,20 +67,18 @@ public class SesameWriteServlet extends HttpServlet {
 
 
 		// sesame start up stuff
-		File dataDir = new File("~/Projects/HHP/HHP/ExtractionS/");
-		Repository rep = new SailRepository(new NativeStore(dataDir));
-		rep.initialize();
+		GlobalVars.rep.initialize();
 		String namespace = "http://example.org/";
 		
 		try {
-			rep.initialize();
+			GlobalVars.rep.initialize();
 		} catch (RepositoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RepositoryConnection conn = null;
+		
 		try {
-			conn = rep.getConnection();
+			GlobalVars.conn = GlobalVars.rep.getConnection();
 		} catch (RepositoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,15 +96,8 @@ public class SesameWriteServlet extends HttpServlet {
 			IRI a = factory.createIRI(namespace + splitString[i+0]);
 			IRI b = factory.createIRI(namespace + splitString[i+1]);
 			Statement statement = factory.createStatement(a, b, factory.createLiteral(splitString[i+2]));
-			conn.add(statement);
-			System.out.println(statement);
-			//System.out.println(statement.toString());
-			try {
-				//conn.add(statement);
-			} catch (RepositoryException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			GlobalVars.conn.add(statement);
+
 		}
 		
 		//Now insert the data into Sesame
@@ -122,9 +113,6 @@ public class SesameWriteServlet extends HttpServlet {
 		// This is a convenience thing - Gson converts  objects into valid json
 		Gson gson = new Gson();
 		out.println(gson.toJson(jss));
-		out.close();
-		conn.close();
-		rep.shutDown();
 	}
 
 	/**

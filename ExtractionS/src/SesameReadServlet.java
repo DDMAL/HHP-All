@@ -54,15 +54,13 @@ public class SesameReadServlet extends HttpServlet {
 		 * For example: http://localhost:8080/ExtractionS/SesameReadServlet?lookup=test
 		 */
 		
-		File dataDir = new File("~/Projects/HHP/HHP/ExtractionS");
-		Repository rep = new SailRepository(new NativeStore(dataDir));
-		rep.initialize();
-		
+
+		GlobalVars.rep.initialize();
 		List<Statement> list = new ArrayList<Statement>();
 		List<RDFTriple> finalList = new ArrayList<RDFTriple>();
 		
 		try {
-			   RepositoryConnection con = rep.getConnection();
+			   RepositoryConnection con = GlobalVars.rep.getConnection();
 			   try {
 					RepositoryResult<Statement> statements =  con.getStatements(null, null, null, true);
 					list = statements.asList();
