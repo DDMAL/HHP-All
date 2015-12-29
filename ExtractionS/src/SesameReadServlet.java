@@ -1,6 +1,7 @@
 
 
 import java.io.File;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,11 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jblas.util.Random;
 import org.openrdf.OpenRDFException;
+import org.openrdf.model.Statement;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.RepositoryResult;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.sail.nativerdf.NativeStore;
 
@@ -51,23 +54,22 @@ public class SesameReadServlet extends HttpServlet {
 		 * For example: http://localhost:8080/ExtractionS/SesameReadServlet?lookup=test
 		 */
 		
-		File dataDir = new File("./");
+		File dataDir = new File("~/Projects/HHP/HHP/ExtractionS");
 		Repository rep = new SailRepository(new NativeStore(dataDir));
 		rep.initialize();
 		
-		List<String> list = new ArrayList<String>();
+		List<Statement> list = new ArrayList<Statement>();
 		
 		try {
 			   RepositoryConnection con = rep.getConnection();
 			   try {
-			      String queryString = "SELECT x, y FROM {x} p {y}";
-			      TupleQuery tupleQuery = con.prepareTupleQuery(QueryLanguage.SERQL, queryString);
-			      TupleQueryResult result = tupleQuery.evaluate();
+					RepositoryResult<Statement> statements =  con.getStatements(null, null, null, true);
+					list = statements.asList();
 			      try {
-			         list.add(result.toString());
+			    	 
 			      }
 			      finally {
-			         result.close();
+			         
 			      }
 			   }
 			   finally {
@@ -75,7 +77,7 @@ public class SesameReadServlet extends HttpServlet {
 			   }
 			}
 			catch (OpenRDFException e) {
-			   // handle exception
+			   e.printStackTrace();
 			}
 		
 		

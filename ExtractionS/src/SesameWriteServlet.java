@@ -18,6 +18,7 @@ import org.jblas.util.Random;
 import com.google.gson.Gson;
 import info.aduna.iteration.Iterations;
 
+import org.openrdf.model.IRI;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Model;
 import org.openrdf.model.Namespace;
@@ -66,10 +67,10 @@ public class SesameWriteServlet extends HttpServlet {
 
 
 		// sesame start up stuff
-		File dataDir = new File("./");
+		File dataDir = new File("~/Projects/HHP/HHP/ExtractionS/");
 		Repository rep = new SailRepository(new NativeStore(dataDir));
 		rep.initialize();
-
+		String namespace = "http://example.org/";
 		
 		try {
 			rep.initialize();
@@ -91,12 +92,15 @@ public class SesameWriteServlet extends HttpServlet {
 		ValueFactory factory = ValueFactoryImpl.getInstance();
 		
 		for(int i = 0; i < splitString.length; i+=3) {
-			
-			URI a = factory.createURI(splitString[0]);
-			URI b = factory.createURI(splitString[1]);
-			Statement statement = factory.createStatement(a, b, factory.createLiteral(splitString[2]));
+			IRI john = factory.createIRI(namespace, "john");
+			conn.add(john, RDF.TYPE, RDF.SUBJECT);
+
+			//IRI a = factory.createIRI(namespace + );
+			//IRI b = factory.createIRI(splitString[1]);
+			//Statement statement = factory.createStatement(a, b, factory.createLiteral(splitString[2]));
+			//System.out.println(statement.toString());
 			try {
-				conn.add(statement);
+				//conn.add(statement);
 			} catch (RepositoryException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -117,7 +121,8 @@ public class SesameWriteServlet extends HttpServlet {
 		Gson gson = new Gson();
 		out.println(gson.toJson(jss));
 		out.close();
-		
+		conn.close();
+		rep.shutDown();
 	}
 
 	/**
