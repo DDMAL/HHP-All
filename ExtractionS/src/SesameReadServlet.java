@@ -1,5 +1,6 @@
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -12,6 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.jblas.util.Random;
+import org.openrdf.OpenRDFException;
+import org.openrdf.query.QueryLanguage;
+import org.openrdf.query.TupleQuery;
+import org.openrdf.query.TupleQueryResult;
+import org.openrdf.repository.Repository;
+import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.sail.SailRepository;
+import org.openrdf.sail.nativerdf.NativeStore;
 
 import com.google.gson.Gson;
 
@@ -34,7 +43,7 @@ public class SesameReadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("Hello");
 		/*
 		 * This Servlet works with the following URL parameters:
 		 * lookup: the query to perform against Sesame
@@ -42,20 +51,33 @@ public class SesameReadServlet extends HttpServlet {
 		 * For example: http://localhost:8080/ExtractionS/SesameReadServlet?lookup=test
 		 */
 		
-		String lookup = request.getParameter("lookup");
-		// use the lookup to formulate your query
-		System.out.println(lookup);
+		File dataDir = new File("./");
+		Repository rep = new SailRepository(new NativeStore(dataDir));
+		rep.initialize();
 		
-		//Perform the Sesame Lookup - let's assume this returns RDF triples in a list
-		//like the following
+		List<String> list = new ArrayList<String>();
 		
-		List<RDFTriple> list = new ArrayList<RDFTriple>();
-		for (Integer i = 1; i <= 20; i++)
-		{
-			// generating some fake data
-			RDFTriple a = new RDFTriple("Fred" + Random.nextInt(50), "ate", "Lunch" + Random.nextInt(50), "Graph1", i.toString());
-			list.add(a);
-		}
+		try {
+			   RepositoryConnection con = rep.getConnection();
+			   try {
+			      String queryString = "SELECT x, y FROM {x} p {y}";
+			      TupleQuery tupleQuery = con.prepareTupleQuery(QueryLanguage.SERQL, queryString);
+			      TupleQueryResult result = tupleQuery.evaluate();
+			      try {
+			         list.add(result.toString());
+			      }
+			      finally {
+			         result.close();
+			      }
+			   }
+			   finally {
+			      con.close();
+			   }
+			}
+			catch (OpenRDFException e) {
+			   // handle exception
+			}
+		
 		
 		//Create the response that the servlet returns - this should be a valid JSON object
 		response.setContentType("application/json");

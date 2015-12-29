@@ -71,14 +71,13 @@ function initialize_components() {
 
 	$('#action-save').click(
 			function() {
-
 				$.ajax({
 					type : "GET",
 					dataType : "text",
 					beforeSend : function() {
 					},
 					url : url + "SesameWriteServlet?data="
-							+ encodeURI("some String HERE"), // note the
+							+ encodeURI($('#fileDisplayArea').text()), // note the
 																// encodeURI
 																// takes care of
 																// URL encoding
