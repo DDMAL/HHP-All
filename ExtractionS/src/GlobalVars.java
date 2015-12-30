@@ -13,11 +13,13 @@ import edu.knowitall.tool.tokenize.ClearTokenizer;
 
 public class GlobalVars {
 
-	public static OpenIE openIE = new OpenIE(new ClearParser(new ClearPostagger(
-			new ClearTokenizer(ClearTokenizer.defaultModelUrl()))),
-			new ClearSrl(), false);
-	public static String rootDir = "/Users/nkasch/Documents/HHP";
 	public static File dataDir = new File("~/Projects/HHP/HHP/ExtractionS/");
 	public static Repository rep = new SailRepository(new NativeStore(dataDir));
 	public static RepositoryConnection conn = null;
+	
+	public static OpenIE openIE = new OpenIE(new ClearParser(new ClearPostagger(
+			new ClearTokenizer(ClearTokenizer.defaultModelUrl()))),
+			new ClearSrl(), false);
+	
+	
 }
