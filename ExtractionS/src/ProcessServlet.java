@@ -84,6 +84,7 @@ public class ProcessServlet extends LongRunningProcessServlet {
 			System.out.println("Processing Step 2. - Openie.");
 			this.status = "{\"status\":\"Now processing Openie.\",\"starttime\":" + start_time
 					+ ",\"uuid\":\"" + this.uuid + "\"}";
+			String temp = "";
 			for (String sentence : processed_text.split("\\. ")) {
 
 				Seq<Instance> extractions = GlobalVars.openIE.extract(sentence);
@@ -100,6 +101,8 @@ public class ProcessServlet extends LongRunningProcessServlet {
 					.append(inst.extr().arg1().text()).append("; ")
 					.append(inst.extr().rel().text()).append("; ");
 
+					temp += inst.extr().arg1().text() + "\n" +  inst.extr().rel().text() + "\n";
+
 					Part[] arr2 = new Part[inst.extr().arg2s().length()];
 					inst.extr().arg2s().copyToArray(arr2);
 					/*
@@ -108,9 +111,10 @@ public class ProcessServlet extends LongRunningProcessServlet {
 						System.out.println("%" + arg.text() + "%");
 					}*/
 					if(arr2.length != 0) {
+						System.out.println("Hats: " + arr2[0]);
+						temp += arr2[0] + "\n";
 						sb.append(arr2[0]);
 						sb.append(")\n\n");
-						System.out.println("*" + sb + "*");
 						openIEOutput.append(sb.toString());
 					}
 				}
@@ -120,12 +124,12 @@ public class ProcessServlet extends LongRunningProcessServlet {
 					+ ",\"uuid\":\"" + this.uuid + "\"}";
 			System.out.println("Processing Step 3. - Rewrite");
 			Load load = new Load();
-			System.out.println(openIEOutput.toString());
-			result = load.Loadfilter(openIEOutput.toString());
+			System.out.println("This is the output: " + openIEOutput.toString());
+			//result = load.Loadfilter(openIEOutput.toString());
 			System.out.println("Processing Step 3. - Rewrite Done");
 
 			System.out.println(result);
-
+			result = temp;
 			//result = "hello you";
 
 			//response.sendRedirect("Index.jsp");
