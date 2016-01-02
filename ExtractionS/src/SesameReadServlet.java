@@ -54,7 +54,7 @@ public class SesameReadServlet extends HttpServlet {
 		 * For example: http://localhost:8080/ExtractionS/SesameReadServlet?lookup=test
 		 */
 		
-
+		//if (!GlobalVars.rep.isInitialized())
 		GlobalVars.rep.initialize();
 		List<Statement> list = new ArrayList<Statement>();
 		List<RDFTriple> finalList = new ArrayList<RDFTriple>();
@@ -84,6 +84,7 @@ public class SesameReadServlet extends HttpServlet {
 			}
 			catch (OpenRDFException e) {
 			   e.printStackTrace();
+			   System.out.println(e.getMessage());
 			}
 		
 		

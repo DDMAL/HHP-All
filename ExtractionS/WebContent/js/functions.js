@@ -89,6 +89,7 @@ function initialize_components() {
 							var json = $.parseJSON(data);
 							// console.log(json);
 							$('#info_profile').text(json.status)
+							window.location = "eventsEditor.html"
 
 						},
 						error : function(jqXHR, textStatus, errorThrown) {
@@ -96,7 +97,7 @@ function initialize_components() {
 						}
 					});
 					
-					window.location = "eventsEditor.html"
+					
 					
 			});
 
