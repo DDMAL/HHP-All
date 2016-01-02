@@ -1,0 +1,50 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <listener>
+  	<listener-class>ca.humanhistoryproject.servlets.StartUpListener</listener-class>
+  </listener>
+  <servlet>
+  	<servlet-name>TestServlet</servlet-name>
+  	<display-name>TestServlet</display-name>
+  	<description></description>
+  	<servlet-class>TestServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ProcessServlet</servlet-name>
+  	<display-name>ProcessServlet</display-name>
+  	<description></description>
+  	<servlet-class>ca.humanhistoryproject.servlets.ProcessServlet</servlet-class>
+  </servlet>
+   <servlet>
+  	<servlet-name>SesameReadServlet</servlet-name>
+  	<display-name>SesameReadServlet</display-name>
+  	<description></description>
+  	<servlet-class>ca.humanhistoryproject.servlets.SesameReadServlet</servlet-class>
+  </servlet>
+   <servlet>
+  	<servlet-name>SesameWriteServlet</servlet-name>
+  	<display-name>SesameWriteServlet</display-name>
+  	<description></description>
+  	<servlet-class>ca.humanhistoryproject.servlets.SesameWriteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>TestServlet</servlet-name>
+  	<url-pattern>/TestServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ProcessServlet</servlet-name>
+  	<url-pattern>/ProcessServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+  	<servlet-name>SesameReadServlet</servlet-name>
+  	<url-pattern>/SesameReadServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+  	<servlet-name>SesameWriteServlet</servlet-name>
+  	<url-pattern>/SesameWriteServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

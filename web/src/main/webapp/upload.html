@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Human History Project</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/style1.css">
+
+<script type='text/javascript' src='js/jquery.js'></script>
+<script type='text/javascript' src='js/jquery-migrate.min.js'></script>
+<script type='text/javascript' src='js/jquery-2.1.4.min.js'></script>
+<link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+
+<script src="js/url.js"></script>
+<script src="js/global.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/text.js"></script>
+
+<script>
+	jQuery(document).ready(function() {
+
+		//initialize UI components
+		initialize_components();
+
+	});
+</script>
+<body
+	class="single single-post postid-29987 single-format-standard it-background bp-page colorbox-slideshow">
+	<div id="ajax-error"></div>
+	<div id="fb-root"></div>
+	<div class="after-header no-sticky no-logo">
+		<div
+			class="container-fluid no-padding single-wrapper sidebar-right post-29987 post type-post status-publish format-standard has-post-thumbnail hentry category-information-gathering tag-infogathering tag-osint tag-osint-analysis"
+			data-location="single-page" itemscope
+			itemtype="http://schema.org/Article">
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<div class="container-inner single-content-wrapper classic-post">
+						<div class="row">
+							<div class="col-md-9 single-post-selector">
+								<div class="single-page   category- hidden-contents-menu">
+									<h1 class="padded-panel main-title single-title entry-title">
+										Relation Extraction System: SRED</h1>
+									<p id="breadcrumbs" class="sticky-color"></p>
+
+
+									<img width="1000" height="300" src="img/border.jpg"
+										class=" wp-post-image" alt="information-extraction" />
+
+									<div style="margin-top: 25px">
+
+										<div style="margin-top: 25px">
+											<p
+												style="text-align: justify; font-family: Arial; font-size: 1.5em;">
+												The SRED (Relation Extraction on Documents) project is part
+												of the Human History Project. SRED provides a
+												state-of-the-art relation extraction system including
+												document processing, document extraction, and extraction
+												editing tools. The current version supports relation
+												extraction on documents in English.</p>
+										</div>
+										<h3>Process file</h3>
+										<div style="margin-top: 25px;">
+											<button class="blueButton"
+												onclick="getElementById('fileInput').click()">Choose
+												File</button>
+											<input type="file" id="fileInput" style="display: none">
+										</div>
+										<p>
+											<textarea id="fileDisplayArea"
+												style="background-color: #F2F2F2" rows="6" cols="140">Select a file or paste plain text into the text area...</textarea>
+
+										</p>
+
+									</div>
+									<div id="progressbar_profile" style="width: 20%"></div>
+									<div id="info_profile" style="color: #C8C8C8"></div>
+									<p align="right">
+										<button id="action-profile" class="blueButton">Analyze</button>
+										<button id="action-edit" class="blueButton">Edit in
+											RDF Editor</button>
+									</p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 single-sidebar-selector clearfix">
+			<div class="content-panel fixed-object single-sidebar"></div>
+		</div>
+</body>
+</html>

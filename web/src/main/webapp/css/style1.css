@@ -1,0 +1,148 @@
+h2 { 
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    color: #C8C8C8;
+}
+
+.inputWrapper {
+    height: 32px;
+    width: 64px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    /*Using a background color, but you can use a background image to represent a button*/
+    background-color: #DDF;
+}
+.fileInput {
+    cursor: pointer;
+    height: 100%;
+    position:absolute;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    /*This makes the button huge. If you want a bigger button, increase the font size*/
+    font-size:50px;
+    /*Opacity settings for all browsers*/
+    opacity: 0;
+    -moz-opacity: 0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)
+}
+
+.blueButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #63b8ee), color-stop(1, #468ccf));
+	background:-moz-linear-gradient(top, #63b8ee 5%, #468ccf 100%);
+	background:-webkit-linear-gradient(top, #63b8ee 5%, #468ccf 100%);
+	background:-o-linear-gradient(top, #63b8ee 5%, #468ccf 100%);
+	background:-ms-linear-gradient(top, #63b8ee 5%, #468ccf 100%);
+	background:linear-gradient(to bottom, #63b8ee 5%, #468ccf 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#63b8ee', endColorstr='#468ccf',GradientType=0);
+	background-color:#63b8ee;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #3866a3;
+	display:inline-block;
+	cursor:pointer;
+	color:#14396a;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #7cacde;
+}
+.blueButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #468ccf), color-stop(1, #63b8ee));
+	background:-moz-linear-gradient(top, #468ccf 5%, #63b8ee 100%);
+	background:-webkit-linear-gradient(top, #468ccf 5%, #63b8ee 100%);
+	background:-o-linear-gradient(top, #468ccf 5%, #63b8ee 100%);
+	background:-ms-linear-gradient(top, #468ccf 5%, #63b8ee 100%);
+	background:linear-gradient(to bottom, #468ccf 5%, #63b8ee 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#468ccf', endColorstr='#63b8ee',GradientType=0);
+	background-color:#468ccf;
+}
+.blueButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+body {
+    height: 1000px;
+    /*background-color: #b0e0e6;*/
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.outer_main
+{
+	margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    
+}
+
+/*----- Tabs -----*/
+.tabs {
+	width: 100%;
+	display: inline-block;
+}
+
+/*----- Tab Links -----*/
+/* Clearfix */
+.tab-links:after {
+	display: block;
+	clear: both;
+	content: '';
+}
+
+.tab-links li {
+	margin: 0px 5px;
+	float: left;
+	list-style: none;
+}
+
+.tab-links a {
+	padding: 9px 15px;
+	display: inline-block;
+	border-radius: 3px 3px 0px 0px;
+	background: #7FB5DA;
+	font-size: 16px;
+	font-weight: 600;
+	color: #4c4c4c;
+	transition: all linear 0.15s;
+}
+
+.tab-links a:hover {
+	background: #a7cce5;
+	text-decoration: none;
+}
+
+li.active a, li.active a:hover {
+	background: #fff;
+	color: #4c4c4c;
+}
+
+/*----- Content of Tabs -----*/
+.tab-content {
+	padding: 15px;
+	border-radius: 3px;
+	box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15);
+	background: #fff;
+}
+
+.tab {
+	display: none;
+}
+
+.tab.active {
+	display: block;
+}
