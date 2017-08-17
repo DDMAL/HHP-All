@@ -25,7 +25,7 @@ GlobalVars.java: Contains a handle for OpenIE and the Sesame database.
 
 In WebContent/, the files should be pretty self expanatory.  eventsEditor.html is the database front end, upload.html is the part that does the analysis and puts things into the datbabase.  WebContent/js/functions.js is where the buttons get mapped to the servlets.
 
-For more information, please contact: Max Morawski, mmorawski@minerkasch.com, I'd be happy to answer questions on what's here.
+For more information, please contact: Ichiro Fujinaga (ichiro.fujinaga@mcgill.ca).
 
 
 Previous notes:
