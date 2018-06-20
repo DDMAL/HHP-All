@@ -39,12 +39,12 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.0.13</version>
+			<version>1.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openrdf.sesame</groupId>
 			<artifactId>sesame-runtime</artifactId>
-			<version>4.0.1</version>
+			<version>4.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>edu.washington.cs.knowitall.openie</groupId>
